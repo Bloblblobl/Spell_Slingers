@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameTest", "GameTest\GameTest.csproj", "{BB457667-8E27-48F7-ADB0-219C6A627F78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameCore", "GameCore\GameCore.csproj", "{6A37F64E-7A87-4BFE-9FC2-BE4B7F594D47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameMain", "WindowsGame1\WindowsGame1\GameMain.csproj", "{9D3AA6BD-141B-481A-85B5-8C47E8080927}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "GameMainContent", "WindowsGame1\WindowsGame1Content\GameMainContent.contentproj", "{7CE2D872-A834-4EBE-A59E-4472DC504BE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB457667-8E27-48F7-ADB0-219C6A627F78}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{BB457667-8E27-48F7-ADB0-219C6A627F78}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{BB457667-8E27-48F7-ADB0-219C6A627F78}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{BB457667-8E27-48F7-ADB0-219C6A627F78}.Debug|x86.ActiveCfg = Debug|x86
+		{BB457667-8E27-48F7-ADB0-219C6A627F78}.Debug|x86.Build.0 = Debug|x86
+		{BB457667-8E27-48F7-ADB0-219C6A627F78}.Release|Any CPU.ActiveCfg = Release|x86
+		{BB457667-8E27-48F7-ADB0-219C6A627F78}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{BB457667-8E27-48F7-ADB0-219C6A627F78}.Release|Mixed Platforms.Build.0 = Release|x86
+		{BB457667-8E27-48F7-ADB0-219C6A627F78}.Release|x86.ActiveCfg = Release|x86
+		{BB457667-8E27-48F7-ADB0-219C6A627F78}.Release|x86.Build.0 = Release|x86
+		{6A37F64E-7A87-4BFE-9FC2-BE4B7F594D47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A37F64E-7A87-4BFE-9FC2-BE4B7F594D47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A37F64E-7A87-4BFE-9FC2-BE4B7F594D47}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6A37F64E-7A87-4BFE-9FC2-BE4B7F594D47}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6A37F64E-7A87-4BFE-9FC2-BE4B7F594D47}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6A37F64E-7A87-4BFE-9FC2-BE4B7F594D47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A37F64E-7A87-4BFE-9FC2-BE4B7F594D47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A37F64E-7A87-4BFE-9FC2-BE4B7F594D47}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6A37F64E-7A87-4BFE-9FC2-BE4B7F594D47}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6A37F64E-7A87-4BFE-9FC2-BE4B7F594D47}.Release|x86.ActiveCfg = Release|Any CPU
+		{9D3AA6BD-141B-481A-85B5-8C47E8080927}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{9D3AA6BD-141B-481A-85B5-8C47E8080927}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{9D3AA6BD-141B-481A-85B5-8C47E8080927}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{9D3AA6BD-141B-481A-85B5-8C47E8080927}.Debug|x86.ActiveCfg = Debug|x86
+		{9D3AA6BD-141B-481A-85B5-8C47E8080927}.Debug|x86.Build.0 = Debug|x86
+		{9D3AA6BD-141B-481A-85B5-8C47E8080927}.Release|Any CPU.ActiveCfg = Release|x86
+		{9D3AA6BD-141B-481A-85B5-8C47E8080927}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{9D3AA6BD-141B-481A-85B5-8C47E8080927}.Release|Mixed Platforms.Build.0 = Release|x86
+		{9D3AA6BD-141B-481A-85B5-8C47E8080927}.Release|x86.ActiveCfg = Release|x86
+		{9D3AA6BD-141B-481A-85B5-8C47E8080927}.Release|x86.Build.0 = Release|x86
+		{7CE2D872-A834-4EBE-A59E-4472DC504BE7}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{7CE2D872-A834-4EBE-A59E-4472DC504BE7}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{7CE2D872-A834-4EBE-A59E-4472DC504BE7}.Debug|x86.ActiveCfg = Debug|x86
+		{7CE2D872-A834-4EBE-A59E-4472DC504BE7}.Release|Any CPU.ActiveCfg = Release|x86
+		{7CE2D872-A834-4EBE-A59E-4472DC504BE7}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{7CE2D872-A834-4EBE-A59E-4472DC504BE7}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
