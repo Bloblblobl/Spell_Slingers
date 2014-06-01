@@ -9,8 +9,12 @@ namespace GameCore
     {
         public List<Card> Cards = new List<Card>();
 
-        public Hand()
+        public Hand(bool generateRandomCards)
         {
+            if (!generateRandomCards)
+            {
+                return;
+            }
             for (var i = 0; i < 7; i++)
             {
                 var c = RandomCardGenerator.generateCard(3, 10);

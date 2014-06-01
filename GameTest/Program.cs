@@ -10,8 +10,8 @@ namespace GameTest
     {
         static void Main(string[] args)
         {
-            var humanHand = new Hand();
-            var compHand1 = new Hand();
+            var humanHand = new Hand(true);
+            var compHand1 = new Hand(true);
             //var compHand2 = new Hand();
 
             var human = new HumanPlayer("Gary", humanHand);

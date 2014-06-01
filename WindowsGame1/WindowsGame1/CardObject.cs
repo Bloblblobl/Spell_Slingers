@@ -6,45 +6,45 @@ using GameCore;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace WindowsGame1
+namespace GameMain
 {
     class CardObject
     {
-        public Card card = new Card();
-        public Texture2D texture;
-        public Vector2 location = new Vector2(0,0);
-        public bool flipped = false;
+        public Card _card = new Card();
+        public Texture2D _texture;
+        public Vector2 _location = new Vector2(0,0);
+        public bool _flipped = false;
 
-        int factor = 1;
-        float textFactor = 0.8f;
+        int _factor = 1;
+        float _textFactor = 0.8f;
 
-        const int border = 4;
-        const int fill = 4;
-        const int headerHeight = 12;
+        const int _border = 4;
+        const int _fill = 4;
+        const int _headerHeight = 12;
 
-        int height = 192;
-        int width = 128;
+        int _height = 192;
+        int _width = 128;
 
-        Rectangle imgBounds = new Rectangle(0, 0, 96, 96);
+        Rectangle _imgBounds = new Rectangle(0, 0, 96, 96);
 
         public CardObject()
         {
 
         }
 
-        public CardObject(Texture2D _texture, Vector2 _location, int _height, int _width, int _factor)
+        public CardObject(Texture2D texture, Vector2 location, int height, int width, int factor)
         {
-            texture = _texture;
-            location = _location;
-            height = _height;
-            width = _width;
-            factor = _factor;
+            _texture = texture;
+            _location = location;
+            _height = height;
+            _width = width;
+            _factor = factor;
         }
 
         public void Draw(SpriteBatch spriteBatch, GraphicsDevice graphics, SpriteFont font)
         {
             DrawBackground(spriteBatch, graphics);
-            if (!flipped)
+            if (!_flipped)
             {
                 DrawFill(spriteBatch, graphics);
                 DrawImage(spriteBatch, graphics);
@@ -57,16 +57,16 @@ namespace WindowsGame1
         {
             // Draw the Border
 
-            Texture2D rect = new Texture2D(graphics, width * factor, height * factor);
+            Texture2D rect = new Texture2D(graphics, _width * _factor, _height * _factor);
 
-            Color[] data = new Color[width * height * factor * factor];
+            Color[] data = new Color[_width * _height * _factor * _factor];
             for (int i = 0; i < data.Length; ++i)
             {
                 data[i] = Color.Black;
             }
             rect.SetData(data);
 
-            spriteBatch.Draw(rect, location, Color.White);
+            spriteBatch.Draw(rect, _location, Color.White);
         }
 
         private void DrawFill(SpriteBatch spriteBatch, GraphicsDevice graphics)
@@ -74,19 +74,19 @@ namespace WindowsGame1
             // Draw the Fill
 
             int bord = 4;
-            var w = width - bord;
-            var h = height - bord;
+            var w = _width - bord;
+            var h = _height - bord;
 
-            Texture2D rect = new Texture2D(graphics, w * factor, h * factor);
+            Texture2D rect = new Texture2D(graphics, w * _factor, h * _factor);
 
-            Color[] data = new Color[w * h * factor * factor];
+            Color[] data = new Color[w * h * _factor * _factor];
             for (int i = 0; i < data.Length; ++i)
             {
                 data[i] = Color.Wheat;
             }
             rect.SetData(data);
 
-            var bordLocation = new Vector2((location.X + bord / 2 * factor), (location.Y + bord / 2 * factor));
+            var bordLocation = new Vector2((_location.X + bord / 2 * _factor), (_location.Y + bord / 2 * _factor));
 
             spriteBatch.Draw(rect, bordLocation, Color.White);
         }
@@ -95,28 +95,28 @@ namespace WindowsGame1
         {
             // Draw the Image
 
-            var dx = (border + fill) * 2 * factor;
-            var dy = ((border + fill) * 2 + headerHeight) * factor;
+            var dx = (_border + _fill) * 2 * _factor;
+            var dy = ((_border + _fill) * 2 + _headerHeight) * _factor;
 
-            var bounds = new Rectangle((int)(location.X + dx), 
-                                       (int)(location.Y + dy), 
-                                       imgBounds.Width * factor, 
-                                       imgBounds.Height * factor);
+            var bounds = new Rectangle((int)(_location.X + dx), 
+                                       (int)(_location.Y + dy), 
+                                       _imgBounds.Width * _factor, 
+                                       _imgBounds.Height * _factor);
 
-            spriteBatch.Draw(texture, bounds, Color.White); 
+            spriteBatch.Draw(_texture, bounds, Color.White); 
         }
 
         private void DrawHeader(SpriteBatch spriteBatch, GraphicsDevice graphics, SpriteFont font)
         {
             // Draw the Name
 
-            var dx = (border + fill) * factor;
-            var dy = (border + fill) * factor;
+            var dx = (_border + _fill) * _factor;
+            var dy = (_border + _fill) * _factor;
 
-            var bounds = new Vector2((int)(location.X + dx),
-                                       (int)(location.Y + dy));
+            var bounds = new Vector2((int)(_location.X + dx),
+                                       (int)(_location.Y + dy));
 
-            spriteBatch.DrawString(font, "Name", bounds, Color.Black, 0, Vector2.Zero, textFactor, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, "Name", bounds, Color.Black, 0, Vector2.Zero, _textFactor, SpriteEffects.None, 0);
         }
 
         private void DrawStats(SpriteBatch spriteBatch, GraphicsDevice graphics, SpriteFont font)
@@ -128,13 +128,13 @@ namespace WindowsGame1
         {
             // Draw Rules Text
 
-            var dx = (border + fill) * factor;
-            var dy = ((border + fill) * 3 + headerHeight + imgBounds.Height) * factor;
+            var dx = (_border + _fill) * _factor;
+            var dy = ((_border + _fill) * 3 + _headerHeight + _imgBounds.Height) * _factor;
 
-            var bounds = new Vector2((int)(location.X + dx),
-                                     (int)(location.Y + dy));
+            var bounds = new Vector2((int)(_location.X + dx),
+                                     (int)(_location.Y + dy));
 
-            spriteBatch.DrawString(font, "Text", bounds, Color.Black, 0, Vector2.Zero, textFactor, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, "Text", bounds, Color.Black, 0, Vector2.Zero, _textFactor, SpriteEffects.None, 0);
         }
 
     }

@@ -8,8 +8,9 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using GameCore;
 
-namespace WindowsGame1
+namespace GameMain
 {
     /// <summary>
     /// This is the main type for your game
@@ -18,17 +19,19 @@ namespace WindowsGame1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        CardObject[] cards = new CardObject[2];
+        CardObject[] cards = new CardObject[10];
         SpriteFont font;
 
         // Test Variables
-
+        HandObject _topHand;
+        HandObject _bottomHand;
+        CardDatabase _cardsDB = new CardDatabase();
         Texture2D testure;
         Vector2 location;
         int height = 192;
         int width = 128;
         Random rand = new Random();
-        int factor = 4;
+        int factor = 2;
 
         public Game()
         {
@@ -52,9 +55,29 @@ namespace WindowsGame1
 
             base.Initialize();
 
+            
+
             var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
             form.Location = new System.Drawing.Point(0, 0);
         }
+
+        private void PopulateCardsDatabase()
+        {
+            var texture = Content.Load<Texture2D>("arrowed");
+            var card = new Card { Attack = 3, Defence = 4, Cost = 5, Name = "arrowed" };
+            _cardsDB.Add(card, texture);
+
+            texture = Content.Load<Texture2D>("bleeding-heart");
+            card = new Card { Attack = 4, Defence = 5, Cost = 3, Name = "heart" };
+            _cardsDB.Add(card, texture);
+
+            texture = Content.Load<Texture2D>("boiling-bubbles");
+            card = new Card { Attack = 5, Defence = 3, Cost = 4, Name = "bubbles" };
+            _cardsDB.Add(card, texture);
+        }
+
+
+
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -64,11 +87,14 @@ namespace WindowsGame1
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            testure = Content.Load<Texture2D>("testure");
             font = Content.Load<SpriteFont>("font");
 
-            CreateCards();
-            // TODO: use this.Content to load your game content here
+            PopulateCardsDatabase();
+
+            CreateHands();
+
+            //CreateCards();
+
         }
 
         /// <summary>
@@ -93,6 +119,7 @@ namespace WindowsGame1
 
             // TODO: Add your update logic here
 
+
             base.Update(gameTime);
         }
 
@@ -104,15 +131,33 @@ namespace WindowsGame1
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-            foreach (var c in cards)
-            {
-                c.Draw(spriteBatch, graphics.GraphicsDevice, font);
-            }
+            _topHand.Draw(spriteBatch, graphics.GraphicsDevice, font);
+            _bottomHand.Draw(spriteBatch, graphics.GraphicsDevice, font);
+            //foreach (var c in cards)
+            //{
+            //    c.Draw(spriteBatch, graphics.GraphicsDevice, font);
+            //}
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        void CreateHands()
+        {
+            _topHand = CreateHand(true);
+            _bottomHand = CreateHand(false);
+        }
+
+        HandObject CreateHand(bool topHand)
+        {
+            var hand = new Hand(false);
+            for (int i = 0; i < 7; i++)
+            {
+                hand.Cards.Add(_cardsDB.SelectRandomCard());
+            }
+            var handObject = new HandObject(hand, topHand, height, width, _cardsDB);
+            return handObject;
         }
 
         void CreateCards()
