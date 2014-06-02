@@ -23,10 +23,10 @@ namespace GameMain
         SpriteFont font;
 
         // Test Variables
+        CursorObject _cursor;
         HandObject _topHand;
         HandObject _bottomHand;
         CardDatabase _cardsDB = new CardDatabase();
-        Texture2D testure;
         Vector2 location;
         int height = 192;
         int width = 128;
@@ -54,8 +54,6 @@ namespace GameMain
             // TODO: Add your initialization logic here
 
             base.Initialize();
-
-            
 
             var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
             form.Location = new System.Drawing.Point(0, 0);
@@ -89,8 +87,10 @@ namespace GameMain
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("font");
 
-            PopulateCardsDatabase();
+            
 
+            PopulateCardsDatabase();
+            CreateCursor();
             CreateHands();
 
             //CreateCards();
@@ -101,6 +101,7 @@ namespace GameMain
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.
         /// </summary>
+        
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
@@ -111,6 +112,7 @@ namespace GameMain
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
@@ -118,7 +120,9 @@ namespace GameMain
                 this.Exit();
 
             // TODO: Add your update logic here
+            var mouseState = Mouse.GetState();
 
+            _cursor.Location = new Vector2(mouseState.X, mouseState.Y);
 
             base.Update(gameTime);
         }
@@ -134,6 +138,7 @@ namespace GameMain
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             _topHand.Draw(spriteBatch, graphics.GraphicsDevice, font);
             _bottomHand.Draw(spriteBatch, graphics.GraphicsDevice, font);
+            _cursor.Draw(spriteBatch, graphics.GraphicsDevice, font);
             //foreach (var c in cards)
             //{
             //    c.Draw(spriteBatch, graphics.GraphicsDevice, font);
@@ -160,20 +165,29 @@ namespace GameMain
             return handObject;
         }
 
-        void CreateCards()
+        //void CreateCards()
+        //{
+        //    for (int i = 0; i < cards.Length; i++)
+        //    {
+        //        double cardsPerRow = graphics.PreferredBackBufferWidth / (width * factor);
+
+        //        int row = (int)Math.Floor((i / cardsPerRow));
+
+        //        var x = ((i * width) - (row * (float)cardsPerRow * width)) * factor;
+        //        var y = (row * height) * factor;
+        //        location = new Vector2(x, y);
+
+        //        cards[i] = new CardObject(new Texture2D(), location, height, width, factor);
+        //    }
+        //}
+
+        void CreateCursor()
         {
-            for (int i = 0; i < cards.Length; i++)
-            {
-                double cardsPerRow = graphics.PreferredBackBufferWidth / (width * factor);
+            var cursorTexture = Content.Load<Texture2D>("Cursor");
+            var b = graphics.GraphicsDevice.Viewport.Bounds;
+            var location = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
 
-                int row = (int)Math.Floor((i / cardsPerRow));
-
-                var x = ((i * width) - (row * (float)cardsPerRow * width)) * factor;
-                var y = (row * height) * factor;
-                location = new Vector2(x, y);
-
-                cards[i] = new CardObject(testure, location, height, width, factor);
-            }
+            _cursor = new CursorObject(true, cursorTexture, location);
         }
     }
 }
