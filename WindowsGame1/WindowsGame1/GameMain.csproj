@@ -113,6 +113,7 @@
     <Compile Include="CardObject.cs" />
     <Compile Include="CursorObject.cs" />
     <Compile Include="HandObject.cs" />
+    <Compile Include="IGameObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game.cs" />

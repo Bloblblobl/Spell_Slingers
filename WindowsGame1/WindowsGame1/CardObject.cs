@@ -13,7 +13,8 @@ namespace GameMain
         public Card _card = new Card();
         public Texture2D _texture;
         public Vector2 _location = new Vector2(0,0);
-        public bool _flipped = false;
+        public bool FaceDown { get; set; }
+        public bool Selected { get; set; }
 
         int _factor = 1;
         float _textFactor = 0.8f;
@@ -32,20 +33,23 @@ namespace GameMain
 
         }
 
-        public CardObject(Texture2D texture, Vector2 location, int height, int width, int factor)
+        public CardObject(Texture2D texture, Vector2 location, int height, int width, int factor, bool faceDown = false, bool selected = false)
         {
             _texture = texture;
             _location = location;
             _height = height;
             _width = width;
             _factor = factor;
+            FaceDown = faceDown;
+            Selected = selected;
         }
 
         public void Draw(SpriteBatch spriteBatch, GraphicsDevice graphics, SpriteFont font)
         {
             DrawBackground(spriteBatch, graphics);
-            if (!_flipped)
+            if (!FaceDown)
             {
+                DrawSelected(spriteBatch, graphics);
                 DrawFill(spriteBatch, graphics);
                 DrawImage(spriteBatch, graphics);
                 DrawHeader(spriteBatch, graphics, font);
@@ -53,20 +57,36 @@ namespace GameMain
             }
         }
 
-        private void DrawBackground(SpriteBatch spriteBatch, GraphicsDevice graphics)
+        private void DrawSelected(SpriteBatch spriteBatch, GraphicsDevice graphics)
         {
-            // Draw the Border
+            if (!Selected)
+            {
+                return;
+            }
 
+            DrawRectangle(spriteBatch, graphics, Color.Red);
+
+        }
+
+        private void DrawRectangle(SpriteBatch spriteBatch, GraphicsDevice graphics, Color color)
+        {
             Texture2D rect = new Texture2D(graphics, _width * _factor, _height * _factor);
 
             Color[] data = new Color[_width * _height * _factor * _factor];
             for (int i = 0; i < data.Length; ++i)
             {
-                data[i] = Color.Black;
+                data[i] = color;
             }
             rect.SetData(data);
 
             spriteBatch.Draw(rect, _location, Color.White);
+        }
+
+        private void DrawBackground(SpriteBatch spriteBatch, GraphicsDevice graphics)
+        {
+            // Draw the Border
+
+            DrawRectangle(spriteBatch, graphics, Color.Black);
         }
 
         private void DrawFill(SpriteBatch spriteBatch, GraphicsDevice graphics)

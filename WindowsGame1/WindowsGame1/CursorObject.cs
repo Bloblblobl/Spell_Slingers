@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameMain
 {
-    class CursorObject
+    class CursorObject : IGameObject
     {
         bool _isVisible = true;
         Texture2D _texture;
@@ -30,8 +31,18 @@ namespace GameMain
         {
             if (_isVisible)
             {
-                spriteBatch.Draw(_texture, _location, Color.White);
+                //spriteBatch.Draw(_texture, _location, Color.White);
+
+                var rect = new Rectangle((int)_location.X, (int)_location.Y, _texture.Width, _texture.Height);
+                spriteBatch.Draw(_texture, rect, null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0f);
             }
+        }
+
+
+        public void Update(MouseState mouseState, KeyboardState keyboardState)
+        {
+            _location.X = mouseState.X;
+            _location.Y = mouseState.Y;
         }
     }
 }

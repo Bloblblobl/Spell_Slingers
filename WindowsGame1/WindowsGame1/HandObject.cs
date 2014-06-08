@@ -5,16 +5,21 @@ using System.Text;
 using GameCore;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 
 namespace GameMain
 {
-    class HandObject
+    class HandObject : IGameObject
     {
         private Hand _hand = null;
         private int _cardHeight;
         private int _cardWidth;
         private bool _topHand;
         private CardDatabase _cardsDB;
+        private List<CardObject> _cards;
+        private MouseState _mouseState;
+        private KeyboardState _keyboardState;
 
         public HandObject(Hand hand, bool topHand, int cardHeight, int cardWidth, CardDatabase cardsDB)
         {
@@ -38,7 +43,19 @@ namespace GameMain
             {
                 var location = new Vector2(initHorizontalOffset + _cardWidth * c.Index, y);
                 var texture = _cardsDB.LookupTexture(c.Card);
-                var card = new CardObject(texture, location, _cardHeight, _cardWidth, 1);
+
+                var m = new Point(_mouseState.X, _mouseState.Y);
+                var cardBounds = new Rectangle ((int)location.X, (int)location.Y, _cardWidth, _cardHeight);
+                var selected = cardBounds.Contains(m);
+
+                if (DateTime.Now.Millisecond == 0)
+                {
+                    Debug.WriteLine(cardBounds);
+                    Debug.WriteLine(m);
+                }
+
+
+                var card = new CardObject(texture, location, _cardHeight, _cardWidth, 1, c.Card.FaceDown, selected);
                 cards.Add(card);
             }
 
@@ -49,6 +66,13 @@ namespace GameMain
                 c.Draw(spriteBatch, graphics, font);
             }
 
+        }
+
+
+        public void Update(MouseState mouseState, KeyboardState keyboardState)
+        {
+            _mouseState = mouseState;
+            _keyboardState = keyboardState;
         }
     }
 }

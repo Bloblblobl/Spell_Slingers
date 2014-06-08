@@ -23,9 +23,7 @@ namespace GameMain
         SpriteFont font;
 
         // Test Variables
-        CursorObject _cursor;
-        HandObject _topHand;
-        HandObject _bottomHand;
+        List<IGameObject> _objects = new List<IGameObject>();
         CardDatabase _cardsDB = new CardDatabase();
         Vector2 location;
         int height = 192;
@@ -90,8 +88,8 @@ namespace GameMain
             
 
             PopulateCardsDatabase();
-            CreateCursor();
             CreateHands();
+            CreateCursor();
 
             //CreateCards();
 
@@ -119,10 +117,13 @@ namespace GameMain
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
             var mouseState = Mouse.GetState();
+            var keyboardState = Keyboard.GetState();
 
-            _cursor.Location = new Vector2(mouseState.X, mouseState.Y);
+            foreach (var o in _objects)
+            {
+                o.Update(mouseState, keyboardState);
+            }
 
             base.Update(gameTime);
         }
@@ -136,13 +137,10 @@ namespace GameMain
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-            _topHand.Draw(spriteBatch, graphics.GraphicsDevice, font);
-            _bottomHand.Draw(spriteBatch, graphics.GraphicsDevice, font);
-            _cursor.Draw(spriteBatch, graphics.GraphicsDevice, font);
-            //foreach (var c in cards)
-            //{
-            //    c.Draw(spriteBatch, graphics.GraphicsDevice, font);
-            //}
+            foreach (var o in _objects)
+            {
+                o.Draw(spriteBatch, graphics.GraphicsDevice, font);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -150,8 +148,8 @@ namespace GameMain
 
         void CreateHands()
         {
-            _topHand = CreateHand(true);
-            _bottomHand = CreateHand(false);
+            var hands = new HandObject[] {CreateHand(true), CreateHand(false)};
+            _objects.AddRange(hands);
         }
 
         HandObject CreateHand(bool topHand)
@@ -187,7 +185,8 @@ namespace GameMain
             var b = graphics.GraphicsDevice.Viewport.Bounds;
             var location = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
 
-            _cursor = new CursorObject(true, cursorTexture, location);
+            var cursor = new CursorObject(true, cursorTexture, location);
+            _objects.Add(cursor);
         }
     }
 }

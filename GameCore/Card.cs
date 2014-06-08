@@ -11,6 +11,7 @@ namespace GameCore
         public int Attack;
         public int Defence;
         public int Cost;
+        public bool FaceDown;
 
         public override string  ToString()
         {
