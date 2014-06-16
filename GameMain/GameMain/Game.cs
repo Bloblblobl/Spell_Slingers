@@ -1,14 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using GameCore;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using GameCore;
 
 namespace GameMain
 {
@@ -30,6 +25,8 @@ namespace GameMain
         int width = 128;
         Random rand = new Random();
         int factor = 2;
+        BattleZoneObject _battleZoneObject;
+        BattleZone _battleZone;
 
         public Game()
         {
@@ -85,14 +82,26 @@ namespace GameMain
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("font");
 
-            
-
             PopulateCardsDatabase();
+            CreateBattleZones();
             CreateHands();
             CreateCursor();
 
-            //CreateCards();
+            
 
+        }
+
+        private void CreateBattleZones()
+        {
+            CreateBattleZone(true);
+            CreateBattleZone(false);
+        }
+
+        private void CreateBattleZone(bool top)
+        {
+            _battleZone = new BattleZone(new Hand(false).Cards);
+            _battleZoneObject = new BattleZoneObject(_battleZone, top, height, width, _cardsDB, factor);
+            _objects.Add(_battleZoneObject);
         }
 
         /// <summary>
@@ -141,6 +150,24 @@ namespace GameMain
             {
                 o.Draw(spriteBatch, graphics.GraphicsDevice, font);
             }
+
+            // Temp Begin
+
+            Texture2D rect = new Texture2D(graphics.GraphicsDevice, 2, 2);
+
+            Color[] data = new Color[4];
+            for (int i = 0; i < data.Length; ++i)
+            {
+                data[i] = Color.Red;
+            }
+            rect.SetData(data);
+
+            var center = new Vector2(graphics.PreferredBackBufferWidth / 2 + 1, graphics.PreferredBackBufferHeight / 2 + 1);
+
+            spriteBatch.Draw(rect, center, Color.White);
+
+            // Temp End
+
             spriteBatch.End();
 
             base.Draw(gameTime);

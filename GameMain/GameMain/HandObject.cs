@@ -35,7 +35,7 @@ namespace GameMain
             // Calculate hand location on screen
             var screenWidth = graphics.PresentationParameters.BackBufferWidth;
             var y = _topHand ? 0 : graphics.PresentationParameters.BackBufferHeight - _cardHeight;
-            var initHorizontalOffset = (screenWidth - _hand.Cards.Count * _cardWidth) / 2;
+            var initHorizontalOffset = (screenWidth - _hand.Capacity * _cardWidth) / 2;
 
             // Create CardObject for each card in hand
             var cards = new List<CardObject>();
@@ -48,14 +48,7 @@ namespace GameMain
                 var cardBounds = new Rectangle ((int)location.X, (int)location.Y, _cardWidth, _cardHeight);
                 var selected = cardBounds.Contains(m);
 
-                if (DateTime.Now.Millisecond == 0)
-                {
-                    Debug.WriteLine(cardBounds);
-                    Debug.WriteLine(m);
-                }
-
-
-                var card = new CardObject(texture, location, _cardHeight, _cardWidth, 1, c.Card.FaceDown, selected);
+                var card = new CardObject(texture, location, _cardHeight, _cardWidth, 1, c.Card.FaceDown, selected, false);
                 cards.Add(card);
             }
 

@@ -13,6 +13,7 @@ namespace GameMain
         Card _card = new Card();
         Texture2D _texture;
         Vector2 _location = new Vector2(0,0);
+        public bool Empty { get; set; }
         public bool FaceDown { get; set; }
         public bool Selected { get; set; }
 
@@ -33,7 +34,7 @@ namespace GameMain
 
         }
 
-        public CardObject(Texture2D texture, Vector2 location, int height, int width, int factor, bool faceDown = false, bool selected = false)
+        public CardObject(Texture2D texture, Vector2 location, int height, int width, int factor, bool faceDown = false, bool selected = false, bool empty = false)
         {
             _texture = texture;
             _location = location;
@@ -42,11 +43,18 @@ namespace GameMain
             _factor = factor;
             FaceDown = faceDown;
             Selected = selected;
+            Empty = empty;
         }
 
         public void Draw(SpriteBatch spriteBatch, GraphicsDevice graphics, SpriteFont font)
         {
             DrawBackground(spriteBatch, graphics);
+            if (Empty)
+            {
+                DrawSelected(spriteBatch, graphics);
+                DrawFill(spriteBatch, graphics);
+                return;
+            }
             if (!FaceDown)
             {
                 DrawSelected(spriteBatch, graphics);

@@ -8,6 +8,12 @@ namespace GameCore
     public class Hand
     {
         public List<Card> Cards = new List<Card>();
+        private static int defaultCapacity = 7;
+        public int Capacity = defaultCapacity;
+        public int AvailableSlots
+        {
+            get { return Capacity - Cards.Count; }
+        }
 
         public Hand(bool generateRandomCards)
         {
