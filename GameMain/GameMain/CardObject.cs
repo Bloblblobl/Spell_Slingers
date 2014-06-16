@@ -10,9 +10,9 @@ namespace GameMain
 {
     class CardObject
     {
-        public Card _card = new Card();
-        public Texture2D _texture;
-        public Vector2 _location = new Vector2(0,0);
+        Card _card = new Card();
+        Texture2D _texture;
+        Vector2 _location = new Vector2(0,0);
         public bool FaceDown { get; set; }
         public bool Selected { get; set; }
 

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectGuid>{9D3AA6BD-141B-481A-85B5-8C47E8080927}</ProjectGuid>
+    <ProjectGuid>{071B062E-DCDF-4306-AB9F-537DAD172D25}</ProjectGuid>
     <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -14,7 +14,7 @@
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
     <XnaProfile>HiDef</XnaProfile>
-    <XnaCrossPlatformGroupID>f1e40db2-53e7-4767-a333-875cece95791</XnaCrossPlatformGroupID>
+    <XnaCrossPlatformGroupID>1c0ba487-6a93-4a7a-87e0-51477c63dcf2</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
     <ApplicationIcon>Game.ico</ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
@@ -93,8 +93,6 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -109,28 +107,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BattleZoneObject.cs" />
     <Compile Include="CardDatabase.cs" />
     <Compile Include="CardObject.cs" />
     <Compile Include="CursorObject.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="HandObject.cs" />
     <Compile Include="IGameObject.cs" />
+    <Compile Include="MainWindow.xaml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Game.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\GameCore\GameCore.csproj">
-      <Project>{6A37F64E-7A87-4BFE-9FC2-BE4B7F594D47}</Project>
-      <Name>GameCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WindowsGame1Content\GameMainContent.contentproj">
-      <Name>GameMainContent %28Content%29</Name>
+    <ProjectReference Include="..\GameMainContent\GameMainContent.contentproj">
+      <Name>GameMainContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>
-      <Project>{7CE2D872-A834-4EBE-A59E-4472DC504BE7}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
